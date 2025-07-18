@@ -1,0 +1,22 @@
+# .github/workflows/run-on-ec2.yml
+
+name: Run Hello Script on EC2
+
+on:
+  push:
+    branches:
+      - main  # or your default branch
+
+jobs:
+  run-hello-script:
+    runs-on: [self-hosted,Linux,x64]  # Targets your EC2 self-hosted runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make script executable
+        run: chmod +x ./hello.sh
+
+      - name: Run Hello World script
+        run: ./hello.sh
